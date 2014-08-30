@@ -7,6 +7,10 @@ class Home extends CH_Controller {
     }
 
 
+	public function reg() {
+
+		$this->_view('reg');
+	}
 	public function newbie() {
 		$this->_view('newbie');
 	}
