@@ -169,7 +169,7 @@
 							<div align="left" class="ssBox">
 								<ul>
 									<li>尊敬的会员: <strong style="color:#f90;"><?php echo $this->user->username ?></strong>欢迎你! </li>
-									<li><img src="<?php echo base_url('/assets') ?>/img/login_btn.gif" /> <a href="<?php echo site_url('/account/chat') ?>" target="_blank" style="color:#000">进入交友大厅</a></li>
+									<li><img src="<?php echo base_url('/assets') ?>/img/login_btn.gif" /> <a href="<?php echo site_url('/account/girls') ?>" target="_blank" style="color:#000">进入交友大厅</a></li>
 									<li><img src="<?php echo base_url('/assets') ?>/img/login_btn.gif" /> <a href="<?php echo site_url('/account/index') ?>" style="color:#000">个人中心</a></li>
 									<li><img src="<?php echo base_url('/assets') ?>/img/login_btn.gif" /> <a href="<?php echo site_url('/account/payment') ?>" style="color:#000">账户充值</a></li>
 									<li><img src="<?php echo base_url('/assets') ?>/img/login_btn.gif" /> <a href="<?php echo site_url('/account/logout') ?>" style="color:#000">退出登录</a></li>
