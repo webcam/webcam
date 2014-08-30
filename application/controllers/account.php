@@ -38,7 +38,8 @@ class Account extends CH_Controller {
 
 	public function bank() {
 		if($_POST['v_amount'] && $_POST['bankType']) {
-			$money = '10.00';
+			//$money = '10.00';
+			$money = '0.10';
 			$bank_type = abs($_POST['bankType']);
 
 			$this->load->model('model_order');
