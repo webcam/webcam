@@ -38,8 +38,8 @@ class Account extends CH_Controller {
 
 	public function bank() {
 		if($_POST['v_amount'] && $_POST['bankType']) {
-			//$money = '10.00';
-			$money = '0.10';
+			$money = '10.00';
+			//$money = '0.10';
 			$bank_type = abs($_POST['bankType']);
 
 			$this->load->model('model_order');
@@ -53,25 +53,58 @@ class Account extends CH_Controller {
 
 
 			$config = config_item('pay');
+			//$config= array('id' => '1475', 'code' => '5RSSdUY0gEJ43ajs');
 			$url = 'http://web.eshengpay.com/chargebank.aspx?';
 			$sign = array(
 				'parter' => $config['id'],
 				'type' => $bank_type,
 				'value' => $money,
 				'orderid' => $order_id,
-				'callbackurl' => base_url('epay/callback'),
+				//'callbackurl' => base_url('epay/callback'),
+				'callbackurl' => 'http://www.ek.com/callback/pay_card_callback.php',
 			);
 
-			$key = md5(http_build_query($sign).$config['code']);
+			$tmp = 'parter=1732&type=964&value=20&orderid=20140830204348&callbackurl=http://www.ek.com/callback/pay_card_callback.php';
+echo $tmp.'<br />';
+echo md5($tmp.$config['code']).'<br />';
+echo md5(iconv('UTF-8', 'GBK', $tmp.$config['code']));
+print_r($config);
+			$str = '';
+			foreach($sign as $k=>$v) {
+				$str .= "&{$k}={$v}";
+			}
+			$str = trim($str, '&');
+
+echo $str.'<br />';
+			echo md5($str.$config['code']).'<br />';
+			echo iconv('UTF-8', 'GBK2312', $str.$config['code']).'<br />';
+		$key = md5(iconv('UTF-8', 'GBK2312', $str.$config['code']));
+			echo $key.'<br />';
+//			die($key);
+
 			$params = array(
-				'hrefbackurl' => base_url('account/callback'),
-				'payerIp' => $this->input->ip_address(),
-				'attach' => '',
+				//'hrefbackurl' => base_url('account/callback'),
+				'hrefbackurl' => '',
+				//'payerIp' => $this->input->ip_address(),
+				'payerIp' => '110.184.147.209',
 				'sign' => $key,
 			);
 
+
+
 			$params = $sign + $params;
 
+			$str = '';
+			foreach($params as $k=>$v) {
+				$str .= "&{$k}={$v}";
+			}
+			$str = trim($str, '&');
+			echo $str.'<br />';
+			//$str = iconv('UTF-8', 'GBK2312', $str);
+			//echo $str.'<br />';
+
+			echo $url.$str.'<br />';
+die($url.http_build_query($params));
 			redirect($url.http_build_query($params));
 		}
 	}
